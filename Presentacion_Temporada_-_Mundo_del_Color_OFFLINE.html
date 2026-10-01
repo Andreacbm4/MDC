@@ -334,6 +334,7 @@ body.editing .ed:focus{background:#FFFBEA;outline-style:solid}
 .day.done{background:#F4F3EF}
 .day.done .dd,.day.done .da{color:var(--ink-3)}
 .day.done .st{background:#E3E1DA;color:var(--ink-2)}
+.day.none{background:repeating-linear-gradient(135deg,#F4F3EF 0 10px,#ECEAE4 10px 20px);border-style:dashed}
 .day.next .st{background:var(--ink);color:#fff}
 .day .ig{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.08em;padding:2px 7px;border-radius:6px;background:var(--ppg-soft);color:var(--ppg-dark);margin-top:auto}
 .detail{background:#fff;border-radius:26px;border:1px solid var(--line);padding:34px;display:flex;flex-direction:column;gap:16px;position:relative;overflow:hidden}
@@ -841,7 +842,7 @@ body.editing .ed:focus{background:#FFFBEA;outline-style:solid}
   <p class="lead">Siete formatos que se alternan los sábados. Haz clic en una tarjeta para verla en el cronograma.</p>
   <div class="acts">
     <div class="act" data-cal="juego" style="--c:var(--orange)"><div class="ico">✏️</div><h3>Pictionary</h3><p>El cliente dibuja en el lienzo y otra persona adivina. El ganador se lleva una brocha PPG.</p><span class="when">6 sábados</span></div>
-    <div class="act" data-cal="2026-10-03" style="--c:var(--blue)"><div class="ico">🎨</div><h3>Tinteo por PPG</h3><p>IGLOO: regalo de productos tinteados. Todo el día, el tinteo va por cuenta de PPG.</p><span class="when">Sáb 26/09 y 03/10</span></div>
+    <div class="act" data-cal="2026-10-03" style="--c:var(--blue)"><div class="ico">🎨</div><h3>Tinteo por PPG</h3><p>IGLOO: regalo de productos tinteados. Todo el día, el tinteo va por cuenta de PPG.</p><span class="when">Sáb 03/10</span></div>
     <div class="act" data-cal="2026-10-31" style="--c:var(--blue)"><div class="ico">☕</div><h3>Conexión emocional</h3><p>Escribe una frase en nuestra pared, pinta cerámica y tómate un café.</p><span class="when">Sáb 31/10</span></div>
     <div class="act" data-cal="demo" style="--c:var(--green)"><div class="ico">🧱</div><h3>Demostración de cubrimiento</h3><p>Prueba en pared con Glidden Total, Essentials, Perma Crete y Pitt-Glaze.</p><span class="when">5 sábados</span></div>
     <div class="act" data-cal="2026-11-28" style="--c:var(--green)"><div class="ico">✨</div><h3>Diferencia de acabados</h3><p>Demostración en pared de los distintos acabados, lado a lado.</p><span class="when">Sáb 28/11</span></div>
@@ -1327,14 +1328,14 @@ body.editing .ed:focus{background:#FFFBEA;outline-style:solid}
   $$('[data-go]').forEach(b=>b.onclick=()=>goId(b.dataset.go));
 
   /* ---- calendar data ---- */
-  const C={juego:'var(--orange)',exp:'var(--blue)',demo:'var(--green)',taller:'var(--red)'};
-  const TN={juego:'Juego',exp:'Experiencia',demo:'Demostración',taller:'Taller'};
+  const C={juego:'var(--orange)',exp:'var(--blue)',demo:'var(--green)',taller:'var(--red)',none:'#C9C6BE'};
+  const TN={juego:'Juego',exp:'Experiencia',demo:'Demostración',taller:'Taller',none:'Sin actividad'};
   const PIC='El cliente dibuja en el lienzo lo que desee y otra persona adivina. Al ganador se le obsequia una brocha PPG.';
   const EV=[
     ['2026-09-05','Pictionary',PIC,'juego',0],
     ['2026-09-12','Pictionary',PIC,'juego',0],
     ['2026-09-19','Pictionary',PIC,'juego',0],
-    ['2026-09-26','Regalo de productos tinteados','¡Durante todo el día el tinteo va por PPG!','exp',1],
+    ['2026-09-26','Sin actividad','Este sábado no hubo activación en tienda.','none',0],
     ['2026-10-03','Regalo de productos tinteados','¡Durante todo el día el tinteo va por PPG!','exp',1],
     ['2026-10-10','Cubrimiento Glidden Total','Demostración en pared del cubrimiento de la pintura.','demo',1,'Glidden Total'],
     ['2026-10-17','Cubrimiento Glidden Essentials','Demostración en pared del cubrimiento de la pintura.','demo',0,'Glidden Essentials'],
@@ -1350,7 +1351,7 @@ body.editing .ed:focus{background:#FFFBEA;outline-style:solid}
     ['2026-12-26','Pictionary',PIC,'juego',0]
   ].map(([d,a,desc,t,ig,prod])=>({d,a,desc,t,ig,prod,dt:new Date(d+'T12:00:00')}));
   const NOTES={
-    '2026-09-26':'Arranque de la temporada fuerte: buen momento para lanzar el <b>Pase Profesional</b>.',
+    '2026-10-03':'Arranque de la temporada fuerte: buen momento para lanzar el <b>Pase Profesional</b>.',
     '2026-10-10':'Parte del <b>Mes del Cambio a PPG</b>: la prueba en pared es el argumento principal.',
     '2026-10-31':'Cierra el <b>Mes del Cambio a PPG</b>.',
     '2026-11-14':'<b>Pitt-Glaze</b> es producto foco del trimestre.',
@@ -1372,22 +1373,22 @@ body.editing .ed:focus{background:#FFFBEA;outline-style:solid}
     list.forEach(e=>{
       const b=document.createElement('button');
       const done=e.dt<today, isNext=e===nextEv;
-      b.className='day'+(done?' done':'')+(isNext?' next':'')+(sel===e?' sel':'');
+      b.className='day'+(e.t==='none'?' none':'')+(done?' done':'')+(isNext?' next':'')+(sel===e?' sel':'');
       b.style.setProperty('--c',C[e.t]);
-      b.innerHTML='<span class="dn">Sáb'+(m==='all'?' · '+MES[e.dt.getMonth()]:'')+'</span><span class="dd">'+String(e.dt.getDate()).padStart(2,'0')+'</span><span class="da">'+e.a+'</span>'+(e.ig?'<span class="ig">IGLOO</span>':'')+(done?'<span class="st">Realizado</span>':isNext?'<span class="st">Próximo</span>':'');
+      b.innerHTML='<span class="dn">Sáb'+(m==='all'?' · '+MES[e.dt.getMonth()]:'')+'</span><span class="dd">'+String(e.dt.getDate()).padStart(2,'0')+'</span><span class="da">'+e.a+'</span>'+(e.ig?'<span class="ig">IGLOO</span>':'')+(e.t==='none'?'<span class="st">Vacío</span>':done?'<span class="st">Realizado</span>':isNext?'<span class="st">Próximo</span>':'');
       b.onclick=()=>{sel=e;renderDays(month);renderDetail(e)};
       box.appendChild(b);
     });
-    const c={};list.forEach(e=>c[e.t]=(c[e.t]||0)+1);
+    const real=list.filter(e=>e.t!=='none'),c={};real.forEach(e=>c[e.t]=(c[e.t]||0)+1);
     const PL={juego:'juegos',exp:'experiencias',demo:'demostraciones',taller:'talleres'};
-    $('#cal-count').textContent=list.length+' activaciones · '+Object.keys(c).map(k=>c[k]+' '+(c[k]>1?PL[k]:TN[k].toLowerCase())).join(' · ');
+    $('#cal-count').textContent=real.length+' activaciones · '+Object.keys(c).map(k=>c[k]+' '+(c[k]>1?PL[k]:TN[k].toLowerCase())).join(' · ');
   }
   function renderDetail(e){
     const d=$('#cal-detail');d.style.setProperty('--c',C[e.t]);
     const done=e.dt<today;
     d.innerHTML='<div class="k">Sábado '+e.dt.getDate()+' de '+MESL[e.dt.getMonth()]+'</div>'+
       '<div class="big">'+e.a+'</div>'+
-      '<div class="tags"><span class="chip" style="background:color-mix(in srgb,'+C[e.t]+' 14%,#fff);color:#222">'+TN[e.t]+'</span>'+(e.ig?'<span class="chip" style="background:var(--ppg-soft);color:var(--ppg-dark)">IGLOO</span>':'')+(e.prod?'<span class="chip" style="background:#F1EFEA">'+e.prod+'</span>':'')+(done?'<span class="chip" style="background:#E3E1DA">Realizado</span>':e===nextEv?'<span class="chip" style="background:var(--ink);color:#fff">Próxima activación</span>':'')+'</div>'+
+      '<div class="tags">'+(e.t==='none'?'':'<span class="chip" style="background:color-mix(in srgb,'+C[e.t]+' 14%,#fff);color:#222">'+TN[e.t]+'</span>')+(e.ig?'<span class="chip" style="background:var(--ppg-soft);color:var(--ppg-dark)">IGLOO</span>':'')+(e.prod?'<span class="chip" style="background:#F1EFEA">'+e.prod+'</span>':'')+(e.t==='none'?'':done?'<span class="chip" style="background:#E3E1DA">Realizado</span>':e===nextEv?'<span class="chip" style="background:var(--ink);color:#fff">Próxima activación</span>':'')+'</div>'+
       '<div class="desc">'+e.desc+'</div>'+
       (NOTES[e.d]?'<div class="note">💡 '+NOTES[e.d]+'</div>':'');
   }
@@ -1440,7 +1441,7 @@ body.editing .ed:focus{background:#FFFBEA;outline-style:solid}
     const grid=['2026-10-01','2026-11-01','2026-12-01'].map(d=>'<div class="g-grid" style="left:'+pct(d)+'%"></div>').join('');
     const row=(l,s,inner)=>'<div class="g-row"><div class="gl">'+l+(s?'<small>'+s+'</small>':'')+'</div><div class="g-track">'+grid+inner+'</div></div>';
     const dots=f=>EV.filter(f).map(e=>'<div class="g-dot" title="'+e.a+'" style="--c:'+C[e.t]+';left:'+pct(e.d)+'%"></div>').join('');
-    h+=row('Activaciones sábado','17 fechas',dots(()=>true));
+    h+=row('Activaciones sábado','16 activaciones',dots(e=>e.t!=='none'));
     h+=row('Promotora fija','Lun a sáb en tienda',bar('2026-09-01','2026-12-31','var(--green)','Asesoría + mercaderismo + reporte diario'));
     h+=row('Pase Profesional PPG','Premio: Pantone',bar('2026-09-26','2026-12-31','var(--red)','Fidelidad contratistas y pintores → 31/12','dash'));
     h+=row('Mes del Cambio a PPG','Octubre',bar('2026-10-01','2026-11-01','var(--blue)','Ads + demos de cubrimiento'));
