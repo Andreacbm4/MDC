@@ -154,6 +154,21 @@ h3{font-size:30px;font-weight:600}
 .both{margin-top:20px;border-radius:20px;padding:22px 30px;background:var(--foam);border:1.5px dashed var(--crema);font-size:21px;color:var(--ink-2);display:flex;gap:16px;align-items:center}
 .both b{color:var(--ink)}
 
+/* ---------- ventajas ---------- */
+#s-adv{background:var(--foam)}
+#s-adv h2{margin-bottom:8px}
+.adv{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:26px}
+.av{display:grid;grid-template-columns:96px 1fr;gap:22px;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:22px;padding:22px 28px}
+.av .ic{width:96px;height:96px;border-radius:24px;display:grid;place-items:center}
+.av .ic svg{width:60px;height:60px}
+.av h3{font-size:25px;margin-bottom:6px}
+.av p{font-size:18.5px;line-height:1.45;color:var(--ink-2)}
+.av p b{color:var(--ink)}
+.av .tagline{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--coffee-2);margin-bottom:4px}
+.quote{margin-top:24px;display:flex;align-items:center;gap:22px;background:var(--coffee);color:#fff;border-radius:20px;padding:20px 30px}
+.quote q{font-family:var(--serif);font-style:italic;font-size:28px;quotes:"“" "”"}
+.quote span{margin-left:auto;font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--crema);white-space:nowrap}
+
 /* ---------- 6 cierre ---------- */
 #s-end{padding:0;background:var(--foam)}
 #s-end .ring{width:900px;height:900px;left:50%;top:50%;margin:-450px 0 0 -450px;animation:spin 120s linear infinite;opacity:.95}
@@ -328,9 +343,37 @@ h3{font-size:30px;font-weight:600}
   <div class="stripe"><i></i><i></i><i></i><i></i><i></i></div>
 </section>
 
+<!-- VENTAJAS DE LA ALIANZA -->
+<section class="slide" id="s-adv">
+  <span class="eyebrow"><b>4</b>Ventajas de la alianza</span>
+  <h2>El público ideal para Tributo</h2>
+  <p class="lead">Nuestra tienda reúne a un cliente que <b>invierte en su hogar</b> y valora la calidad: el mismo perfil que disfruta un buen café.</p>
+  <div class="adv">
+    <div class="av">
+      <div class="ic" style="background:#E6F1F8"><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" fill="#0A6DA3"/><path d="M30 15l4.4 9 9.9 1.4-7.2 7 1.7 9.8L30 37.6l-8.8 4.6 1.7-9.8-7.2-7 9.9-1.4z" fill="#fff"/></svg></div>
+      <div><span class="tagline">Respaldo internacional</span><h3>Una marca americana a tu lado</h3><p><b>PPG / Glidden</b> es una marca estadounidense con más de un siglo de trayectoria. Tributo se suma a una alianza con <b>prestigio internacional</b>.</p></div>
+    </div>
+    <div class="av">
+      <div class="ic" style="background:#FFF1E6"><svg viewBox="0 0 60 60" aria-hidden="true"><path d="M8 29L30 10l22 19" fill="none" stroke="#FF6A00" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 26v22h32V26" fill="#FF6A00"/><rect x="25" y="34" width="10" height="14" rx="2" fill="#fff"/></svg></div>
+      <div><span class="tagline">Quién nos visita</span><h3>Dueños de hogar</h3><p>A El Mundo del Color llegan <b>propietarios</b> que remodelan, decoran y renuevan sus espacios: personas que construyen su hogar.</p></div>
+    </div>
+    <div class="av">
+      <div class="ic" style="background:#E8F4E9"><svg viewBox="0 0 60 60" aria-hidden="true"><path d="M18 14h24l10 13-22 21L8 27z" fill="#0B7A12"/><path d="M8 27h44M24 14l-4 13 10 21 10-21-4-13" fill="none" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/></svg></div>
+      <div><span class="tagline">Perfil del cliente</span><h3>Un consumidor que elige calidad</h3><p>Clientes con <b>alto poder de decisión de compra</b>, que invierten en productos premium y buscan experiencias a la altura.</p></div>
+    </div>
+    <div class="av">
+      <div class="ic" style="background:var(--latte)"><svg viewBox="0 0 60 60" aria-hidden="true"><path d="M10 22h34l-3 22a8 8 0 0 1-8 7H21a8 8 0 0 1-8-7z" fill="#6B4430"/><path d="M43 27h4a7 7 0 0 1 0 14h-5" fill="none" stroke="#6B4430" stroke-width="4" stroke-linecap="round"/><path d="M27 41c-5-3.5-8-6-8-9a3.5 3.5 0 0 1 8-1 3.5 3.5 0 0 1 8 1c0 3-3 5.5-8 9z" fill="#fff"/></svg></div>
+      <div><span class="tagline">Contacto directo</span><h3>Tiempo de calidad con la marca</h3><p>Mientras escriben y pintan, los clientes <b>prueban Tributo con calma</b>: una degustación natural, sin prisa y en buena compañía.</p></div>
+    </div>
+  </div>
+  <div class="quote"><q>Quien cuida su hogar, también cuida lo que disfruta.</q><span>El Mundo del Color · PPG / Glidden × Tributo</span></div>
+  <div class="foot"><img data-logo="MDC" alt=""><img class="ppg" data-logo="PPG" alt=""><img class="gl" data-logo="GLIDDEN" alt=""><span class="x">×</span><span class="tb">Tributo</span><span class="num"></span></div>
+  <div class="stripe"><i></i><i></i><i></i><i></i><i></i></div>
+</section>
+
 <!-- 5 PROPUESTA -->
 <section class="slide" id="s-deal">
-  <span class="eyebrow"><b>4</b>Cómo lo hacemos juntos</span>
+  <span class="eyebrow"><b>5</b>Cómo lo hacemos juntos</span>
   <h2>Una alianza donde todos sumamos</h2>
   <div class="deal">
     <div class="side mdc">
